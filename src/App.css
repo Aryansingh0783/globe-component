@@ -1,0 +1,264 @@
+:root {
+  color-scheme: dark;
+  font-family:
+    'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #0a0a0b;
+  color: #e7e7ea;
+}
+
+button {
+  font: inherit;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  isolation: isolate;
+  background: #0a0a0b;
+}
+
+.topbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 30px;
+  pointer-events: none;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #d9d9de;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+}
+
+.brand-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 75%, transparent);
+}
+
+.brand-sub {
+  margin-left: 2px;
+  color: #4d4d58;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.022);
+  color: #6b6b76;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
+}
+
+.status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4b4b55;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.status.is-ready .status-dot {
+  background: var(--accent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 65%, transparent);
+}
+
+.stage {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  flex: 1;
+  place-items: center;
+  padding: clamp(74px, 10vh, 108px) 24px clamp(82px, 12vh, 116px);
+}
+
+.globe-wrap {
+  position: relative;
+  width: min(860px, 80vh, 90vw);
+  aspect-ratio: 1;
+}
+
+.hero-globe {
+  position: relative;
+  z-index: 1;
+}
+
+.bottombar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 30px;
+  pointer-events: none;
+}
+
+.readout {
+  min-height: 38px;
+}
+
+.readout-label {
+  margin-bottom: 7px;
+  color: #4e4e59;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.readout-value {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+  color: #8b8b96;
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  line-height: 1.5;
+}
+
+.readout-value .coords {
+  color: #e6e6ea;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+}
+
+.sep {
+  color: #383842;
+}
+
+.palette {
+  display: flex;
+  gap: 4px;
+  pointer-events: auto;
+}
+
+.swatch {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  padding: 7px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.42;
+  outline: 1px solid transparent;
+  outline-offset: 1px;
+  place-items: center;
+  transition: opacity 0.2s ease, transform 0.2s ease, outline-color 0.2s ease;
+}
+
+.swatch::before {
+  width: 100%;
+  height: 100%;
+  content: '';
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  background: var(--swatch);
+}
+
+.swatch:hover {
+  opacity: 0.82;
+  transform: scale(1.06);
+}
+
+.swatch[data-active='true'] {
+  opacity: 1;
+  outline-color: color-mix(in srgb, var(--swatch) 55%, transparent);
+}
+
+.swatch:focus-visible {
+  outline: 1px solid #ffffff;
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .topbar {
+    padding: 18px 20px;
+  }
+
+  .bottombar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px 20px 20px;
+  }
+
+  .palette {
+    align-self: flex-end;
+    order: -1;
+  }
+
+  .stage {
+    padding: 68px 16px 108px;
+  }
+
+  .globe-wrap {
+    width: min(94vw, 56vh);
+  }
+
+  .readout-value {
+    font-size: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .readout-label {
+    letter-spacing: 0.24em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swatch,
+  .status-dot {
+    transition: none;
+  }
+}
